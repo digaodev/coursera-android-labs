@@ -21,7 +21,6 @@ public class ActivityTwo extends Activity {
 
 	// Lifecycle counters
 
-	// TODO:
 	// Create variables named 	
 	// mCreate, mRestart, mStart and mResume 	
 	// to count calls to onCreate(), onRestart(), onStart() and
@@ -29,28 +28,34 @@ public class ActivityTwo extends Activity {
 	
 	// You will need to increment these variables' values when their
 	// corresponding lifecycle methods get called.
-	
+	public int mCreate;
+	public int mRestart;
+	public int mStart;
+	public int mResume;
 
 	
-	
-	// TODO: Create variables for each of the TextViews
+
 	// named  mTvCreate, mTvRestart, mTvStart, mTvResume.
 	// for displaying the current count of each counter variable
+	public TextView mTvCreate;
+	public TextView mTvRestart;
+	public TextView mTvStart;
+	public TextView mTvResume;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_two);
 
-		// TODO: Assign the appropriate TextViews to the TextView variables
 		// Hint: Access the TextView by calling Activity's findViewById()
 		// textView1 = (TextView) findViewById(R.id.textView1);
+        mTvCreate = (TextView) findViewById(R.id.create);
+        mTvRestart = (TextView) findViewById(R.id.restart);
+        mTvStart = (TextView) findViewById(R.id.start);
+        mTvResume = (TextView) findViewById(R.id.resume);
 
 
-		
-		
-		
-		
 		Button closeButton = (Button) findViewById(R.id.bClose); 
 		closeButton.setOnClickListener(new OnClickListener() {
 
@@ -60,6 +65,7 @@ public class ActivityTwo extends Activity {
 				// TODO:
 				// This function closes Activity Two
 				// Hint: use Context's finish() method
+                finish();
 
 				
 			
@@ -69,11 +75,14 @@ public class ActivityTwo extends Activity {
 		// Has previous state been saved?
 		if (savedInstanceState != null) {
 
-			// TODO:
+
 			// Restore value of counters from saved state
 			// Only need 4 lines of code, one for every count variable
 
-
+            this.mCreate = savedInstanceState.getInt(CREATE_KEY);
+            this.mStart = savedInstanceState.getInt(START_KEY);
+            this.mResume = savedInstanceState.getInt(RESUME_KEY);
+            this.mRestart = savedInstanceState.getInt(RESTART_KEY);
 			
 			
 			
@@ -83,10 +92,11 @@ public class ActivityTwo extends Activity {
 		// Emit LogCat message
 		Log.i(TAG, "Entered the onCreate() method");
 
-		// TODO:
+
 		// Update the appropriate count variable
 		// Update the user interface via the displayCounts() method
-
+        mCreate+=1;
+        displayCounts();
 
 		
 		
@@ -101,10 +111,11 @@ public class ActivityTwo extends Activity {
 		// Emit LogCat message
 		Log.i(TAG, "Entered the onStart() method");
 
-		// TODO:
+
 		// Update the appropriate count variable
 		// Update the user interface
-
+        mStart+=1;
+        displayCounts();
 
 		
 		
@@ -117,10 +128,11 @@ public class ActivityTwo extends Activity {
 		// Emit LogCat message
 		Log.i(TAG, "Entered the onResume() method");
 
-		// TODO:
+
 		// Update the appropriate count variable
 		// Update the user interface
-
+        mResume+=1;
+        displayCounts();
 
 	
 	}
@@ -148,10 +160,11 @@ public class ActivityTwo extends Activity {
 		// Emit LogCat message
 		Log.i(TAG, "Entered the onRestart() method");
 
-		// TODO:
+
 		// Update the appropriate count variable
 		// Update the user interface
-
+        mRestart+=1;
+        displayCounts();
 
 	
 	
@@ -168,12 +181,15 @@ public class ActivityTwo extends Activity {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 
-		// TODO:
+
 		// Save counter state information with a collection of key-value pairs
 		// 4 lines of code, one for every count variable
+        savedInstanceState.putInt(CREATE_KEY,mCreate);
+        savedInstanceState.putInt(START_KEY,mStart);
+        savedInstanceState.putInt(RESUME_KEY,mResume);
+        savedInstanceState.putInt(RESTART_KEY,mRestart);
 
-
-
+        super.onSaveInstanceState(savedInstanceState);
 		
 		
 		
@@ -186,13 +202,13 @@ public class ActivityTwo extends Activity {
 	// specified above
 	public void displayCounts() {
 
-		// TODO - uncomment these lines
-	/*
+
+
 		mTvCreate.setText("onCreate() calls: " + mCreate);
 		mTvStart.setText("onStart() calls: " + mStart);
 		mTvResume.setText("onResume() calls: " + mResume);
 		mTvRestart.setText("onRestart() calls: " + mRestart);
-	*/
+
 	
 	}
 }
